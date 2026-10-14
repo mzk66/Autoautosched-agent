@@ -1,0 +1,48 @@
+[
+  {
+    "id": "inspect_complete_context",
+    "fixture": "clean",
+    "action": "inspect",
+    "expected_stage": "ready_for_confirmation",
+    "solver_called": false,
+    "expected_phrases": [
+      "任务理解完成",
+      "READY_FOR_CONFIRMATION",
+      "确认并排程"
+    ]
+  },
+  {
+    "id": "inspect_missing_due_time",
+    "fixture": "missing_due_time",
+    "action": "inspect",
+    "expected_stage": "clarifying",
+    "solver_called": false,
+    "expected_phrases": [
+      "CLARIFYING",
+      "due_time"
+    ]
+  },
+  {
+    "id": "solve_missing_due_time",
+    "fixture": "missing_due_time",
+    "action": "solve",
+    "expected_stage": "clarifying",
+    "solver_called": false,
+    "expected_phrases": [
+      "开始排程前",
+      "本轮未调用 Solver"
+    ]
+  },
+  {
+    "id": "solve_complete_context",
+    "fixture": "clean",
+    "action": "solve",
+    "expected_stage": "completed",
+    "solver_called": true,
+    "expected_phrases": [
+      "方案 V1",
+      "Verification: PASSED",
+      "排程明细"
+    ]
+  }
+]

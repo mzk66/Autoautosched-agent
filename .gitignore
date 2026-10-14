@@ -1,0 +1,29 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+.streamlit/
+.aws/
+.codex/
+.agents/
+.vscode/
+.idea/
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Runtime data and local backups
+data/*
+!data/autosched_demo.xlsx
+*.orig
+*.bak
+*.log
+.DS_Store
