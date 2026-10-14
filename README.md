@@ -19,16 +19,19 @@ MCP 和多人登录尚未实现。第一轮先让一份共同样例跑通完整�
 克隆仓库后，在根目录执行：
 
 ```bash
+git clone https://github.com/mzk66/Autoautosched-agent.git
+cd Autoautosched-agent
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
-cp .env.example .env
 python -m streamlit run app.py
 ```
 
-Windows PowerShell 激活用 `.venv\Scripts\Activate.ps1`，复制配置用 `Copy-Item .env.example .env`。
+Windows PowerShell 激活用 `.venv\Scripts\Activate.ps1`。
 
-打开终端给出的网址。上传 `data/autosched_demo.xlsx`，先发送“检查数据”，再发送“开始排程”。默认 mock 不调用真实模型；接真实模型时填写 `.env` 中的 `LLM_*` 配置，或修改侧边栏设置。
+默认演示模式，无需安装千问、Ollama 或配置 API Key，也不需要 `.env`。打开终端给出的网址，上传 `data/autosched_demo.xlsx`，先发送“检查数据”，再发送“开始排程”，即可运行真实的本地排程求解和复核。
+
+演示聊天只回显消息，没有真实 AI 理解能力。需要真实模型时，把 `.env.example` 复制为 `.env`，将 `LLM_PROVIDER` 改为 `openai_compatible`，填写服务地址、模型名和密钥；也可在侧边栏设置。大家共用的在线 AI 网站尚未部署。
 
 测试：`python -m pytest -q`。依赖尚未锁定完整版本；缺少依赖时先确认安装和 Python 环境。
 

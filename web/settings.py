@@ -2,7 +2,7 @@ import os
 
 import streamlit as st
 
-from agent.llm.factory import get_default_ollama_base_url, should_ignore_proxy
+from agent.llm.factory import DEFAULT_LLM_PROVIDER, get_default_ollama_base_url, should_ignore_proxy
 
 
 def render_llm_settings():
@@ -13,13 +13,13 @@ def render_llm_settings():
 
     default_provider = os.getenv(
         "LLM_PROVIDER",
-        "openai_compatible",
+        DEFAULT_LLM_PROVIDER,
     )
 
     default_provider_index = (
         provider_options.index(default_provider)
         if default_provider in provider_options
-        else 0
+        else provider_options.index(DEFAULT_LLM_PROVIDER)
     )
 
     with st.sidebar:
@@ -31,8 +31,12 @@ def render_llm_settings():
             index=default_provider_index,
         )
 
+        if provider == "mock":
+            st.info("演示模式：未连接真实大模型，可上传样例检查数据、执行本地排程。")
+
         base_url = st.text_input(
             "Base URL",
+            disabled=provider == "mock",
             value=os.getenv(
                 "LLM_BASE_URL",
                 get_default_ollama_base_url(),
@@ -41,6 +45,7 @@ def render_llm_settings():
 
         model = st.text_input(
             "Model",
+            disabled=provider == "mock",
             value=os.getenv(
                 "LLM_MODEL",
                 "qwen2.5:7b",
@@ -49,6 +54,7 @@ def render_llm_settings():
 
         api_key = st.text_input(
             "API Key",
+            disabled=provider == "mock",
             value=os.getenv(
                 "LLM_API_KEY",
                 "ollama",
@@ -58,6 +64,7 @@ def render_llm_settings():
 
         ignore_proxy = st.checkbox(
             "Ignore proxy",
+            disabled=provider == "mock",
             value=should_ignore_proxy(base_url),
         )
 

@@ -7,6 +7,8 @@ from agent.llm.base import LLMClient
 from agent.llm.mock import MockLLMClient
 from agent.llm.openai_compatible import OpenAICompatibleLLMClient
 
+DEFAULT_LLM_PROVIDER = "mock"
+
 
 def parse_default_gateway(
     route_table: str,
@@ -78,7 +80,7 @@ def create_llm_client(
     resolved_provider = (
         provider
         or os.getenv("LLM_PROVIDER")
-        or "openai_compatible"
+        or DEFAULT_LLM_PROVIDER
     )
 
     if resolved_provider == "mock":

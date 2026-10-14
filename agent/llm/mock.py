@@ -4,7 +4,7 @@ from agent.llm.base import LLMClient, LLMMessage, LLMResponse
 class MockLLMClient(LLMClient):
     def __init__(
         self,
-        reply: str = "本地 Mock AI 已连接。",
+        reply: str = "演示模式：未连接真实大模型。",
     ):
         self.reply = reply
 
